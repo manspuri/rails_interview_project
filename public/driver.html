@@ -22,60 +22,60 @@
       <div class="six columns">
         Start time:
         <select name="start-time" id="start-time">
-          <option value="00:00">12:00am</option>
-          <option value="01:00">01:00am</option>
-          <option value="02:00">02:00am</option>
-          <option value="03:00">03:00am</option>
-          <option value="04:00">04:00am</option>
-          <option value="05:00">05:00am</option>
-          <option value="06:00">06:00am</option>
-          <option value="07:00">07:00am</option>
-          <option value="08:00">08:00am</option>
-          <option value="09:00">09:00am</option>
-          <option value="10:00">10:00am</option>
-          <option value="11:00">11:00am</option>
-          <option value="12:00">12:00pm</option>
-          <option value="13:00">01:00pm</option>
-          <option value="14:00">02:00pm</option>
-          <option value="15:00">03:00pm</option>
-          <option value="16:00">04:00pm</option>
-          <option value="17:00">05:00pm</option>
-          <option value="18:00">06:00pm</option>
-          <option value="19:00">07:00pm</option>
-          <option value="20:00">08:00pm</option>
-          <option value="21:00">09:00pm</option>
-          <option value="22:00">10:00pm</option>
-          <option value="23:00">11:00pm</option>
+          <option value=0>12:00am</option>
+          <option value=1>01:00am</option>
+          <option value=2>02:00am</option>
+          <option value=3>03:00am</option>
+          <option value=4>04:00am</option>
+          <option value=5>05:00am</option>
+          <option value=6>06:00am</option>
+          <option value=7>07:00am</option>
+          <option value=8>08:00am</option>
+          <option value=9>09:00am</option>
+          <option value=10>10:00am</option>
+          <option value=11>11:00am</option>
+          <option value=12>12:00pm</option>
+          <option value=13>01:00pm</option>
+          <option value=14>02:00pm</option>
+          <option value=15>03:00pm</option>
+          <option value=16>04:00pm</option>
+          <option value=17>05:00pm</option>
+          <option value=18>06:00pm</option>
+          <option value=19>07:00pm</option>
+          <option value=20>08:00pm</option>
+          <option value=21>09:00pm</option>
+          <option value=22>10:00pm</option>
+          <option value=23>11:00pm</option>
         </select>
         <input type="text" name="start-date" id="start-date" class="date">
       </div>
       <div class="six columns">
         End time:
         <select name="end-time" id="end-time">
-          <option value="00:00">12:00am</option>
-          <option value="01:00" selected>01:00am</option>
-          <option value="02:00">02:00am</option>
-          <option value="03:00">03:00am</option>
-          <option value="04:00">04:00am</option>
-          <option value="05:00">05:00am</option>
-          <option value="06:00">06:00am</option>
-          <option value="07:00">07:00am</option>
-          <option value="08:00">08:00am</option>
-          <option value="09:00">09:00am</option>
-          <option value="10:00">10:00am</option>
-          <option value="11:00">11:00am</option>
-          <option value="12:00">12:00pm</option>
-          <option value="13:00">01:00pm</option>
-          <option value="14:00">02:00pm</option>
-          <option value="15:00">03:00pm</option>
-          <option value="16:00">04:00pm</option>
-          <option value="17:00">05:00pm</option>
-          <option value="18:00">06:00pm</option>
-          <option value="19:00">07:00pm</option>
-          <option value="20:00">08:00pm</option>
-          <option value="21:00">09:00pm</option>
-          <option value="22:00">10:00pm</option>
-          <option value="23:00">11:00pm</option>
+          <option value=0>12:00am</option>
+          <option value=1 selected>01:00am</option>
+          <option value=2>02:00am</option>
+          <option value=3>03:00am</option>
+          <option value=4>04:00am</option>
+          <option value=5>05:00am</option>
+          <option value=6>06:00am</option>
+          <option value=7>07:00am</option>
+          <option value=8>08:00am</option>
+          <option value=9>09:00am</option>
+          <option value=10>10:00am</option>
+          <option value=11>11:00am</option>
+          <option value=12>12:00pm</option>
+          <option value=13>01:00pm</option>
+          <option value=14>02:00pm</option>
+          <option value=15>03:00pm</option>
+          <option value=16>04:00pm</option>
+          <option value=17>05:00pm</option>
+          <option value=18>06:00pm</option>
+          <option value=19>07:00pm</option>
+          <option value=20>08:00pm</option>
+          <option value=21>09:00pm</option>
+          <option value=22>10:00pm</option>
+          <option value=23>11:00pm</option>
         </select>
         <input type="text" name="start-date" id="end-date" class="date">
       </div>
@@ -112,12 +112,14 @@
 
     $("#check-availability").click(checkAvailability);
 
+
     function checkAvailability() {
-      var start = $("#start-date").val() + " " + $("#start-time").val();
-      var end = $("#end-date").val() + " " + $("#end-time").val();
+      var start = $("#start-date").val() + " " + $("#start-time").val().toString() + ":00";
+      var end = $("#end-date").val() + " " + $("#end-time").val().toString() + ":00";
+      var parkingPeriod = ($("#end-time").val() - $("#start-time").val());
 
       /* Replace this with real logic, or just submit the form */
-      if (Math.floor((Math.random() * 2))) {
+      if (parkingPeriod <= 3) {
         parkingNotAvailable(start, end);
       } else {
         parkingAvailable(start, end, Math.floor((Math.random() * 25) + 1));
