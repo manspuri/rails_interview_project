@@ -119,7 +119,9 @@
       var parkingPeriod = ($("#end-time").val() - $("#start-time").val());
 
       /* Replace this with real logic, or just submit the form */
-      if (parkingPeriod <= 3) {
+
+
+      if (parkingPeriod < 1) {
         parkingNotAvailable(start, end);
       } else {
         parkingAvailable(start, end, Math.floor((Math.random() * 25) + 1));
